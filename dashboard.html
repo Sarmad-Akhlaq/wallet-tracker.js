@@ -11,13 +11,22 @@
         <div class="navbar">
             <div class="logo flex"><h1>Logo</h1></div>
             <div class="amount flex"><h2>40$</h2></div>
-            <div class="name flex"><h3>name</h3></div>
+            <div class="name flex"> <button class="signoutBtn">Signout</button><h3>name</h3></div>
         </div>
         <div class="transactionform flex">
-            transaction form
+            <form class="transactionform">
+            <input type="text" placeholder="title" class="title">
+            <input type="text" placeholder="cost" class="cost">
+            <select class="transactionType">
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+            </select>
+            <input class="transactionAt" type="date">
+            <button type="submit">ADD</button>
+            </form>
         </div>
-        <div class="transactionlist flex">
-            transaction list
+        <div class="transactionlist">
+                
         </div>
     </div>
 
