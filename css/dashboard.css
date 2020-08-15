@@ -35,7 +35,7 @@
 }
 
 .transactionlist{
-    background: limegreen;
+    background: lightgreen;
 }
 
 .transactionListItem{
@@ -46,4 +46,12 @@
 
 .listItem{
     padding: 20px;
+}
+
+.income{
+    color: green;
+}
+
+.expense{
+    color: red;
 }

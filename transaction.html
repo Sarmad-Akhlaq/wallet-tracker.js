@@ -6,6 +6,40 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>transaction Page</h1>
+    <h1>Transaction Page</h1>
+
+    <div class="transactionform flex">
+        <form class="transactionform">
+        <input type="text" placeholder="title" class="title">
+        <input type="text" placeholder="cost" class="cost">
+        <select class="transactionType">
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+        </select>
+        <input class="transactionAt" type="date">
+        <button type="submit">EDIT</button>
+        </form>
+    </div>
+
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-firestore.js"></script>
+
+<script>
+// Your web app's Firebase configuration
+var firebaseConfig = {
+apiKey: "AIzaSyDM3N2QIhiu6hledfnGX4FqMOAOJeV8m9w",
+authDomain: "wallet-tracker-js-c1fde.firebaseapp.com",
+databaseURL: "https://wallet-tracker-js-c1fde.firebaseio.com",
+projectId: "wallet-tracker-js-c1fde",
+storageBucket: "wallet-tracker-js-c1fde.appspot.com",
+messagingSenderId: "729741079273",
+appId: "1:729741079273:web:35832ce884345945f1b678"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+</script>
+
+    <script src="/js/transaction.js"></script>
 </body>
 </html>

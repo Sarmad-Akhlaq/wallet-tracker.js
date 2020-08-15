@@ -7,11 +7,14 @@ var transactionlist = document.querySelector(".transactionlist")
 var uid = null;
 
 var renderTransactions = (transactionArr) => {
+    //setting user current amount
+    finalCostCalculation(transactionArr);
+    //display all transactions
     transactionlist.innerHTML = "";
     transactionArr.forEach((transaction,index) => {
-        var {title,cost,transactionAt,transactionId} = transaction;
+        var {title,cost,transactionAt,transactionId, transactionType} = transaction;
         transactionlist.insertAdjacentHTML("beforeend",
-        `<div class="transactionListItem">
+        `<div class='transactionListItem ${transactionType === "income" ? "income" : "expense"}'>
         <div class="renderIndex listItem">
         <h3>${++index}</h3>
         </div>
@@ -48,14 +51,14 @@ var fetchUserInfo = async (uid) => {
 var transactionFormSubmission = async (e) =>{
     e.preventDefault();
     try {
-        var title = document.querySelector(".title").value;
+    var title = document.querySelector(".title").value;
     var cost = document.querySelector(".cost").value;
     var transactionType = document.querySelector(".transactionType").value;
     var transactionAt = document.querySelector(".transactionAt").value;
     if(title && cost && transactionType && transactionAt) {
         var transactionObj = {
             title,
-            cost,
+            cost: parseInt(cost),
             transactionType,
             transactionAt: new Date(transactionAt),
             transactionBy: uid
@@ -71,6 +74,21 @@ var transactionFormSubmission = async (e) =>{
      console.log(error)   
     }
 };
+
+var finalCostCalculation = (transArr) => {
+    var amountDiv = document.querySelector(".amount h2")
+    var totalAmount = 0;
+    transArr.forEach((transaction) =>{
+        var {cost, transactionType} = transaction;
+        if(transactionType === "income"){
+            totalAmount = totalAmount + cost 
+        } else{
+            totalAmount = totalAmount - cost 
+        }
+    })
+    console.log(totalAmount)
+    amountDiv.textContent = `${totalAmount}RS`
+} 
 
 var fetchTransactions = async (uid) =>{
     var transactions = [];
@@ -92,8 +110,13 @@ auth.onAuthStateChanged( async (user) => {
         var userInfo = await fetchUserInfo(uid)
         //setting user info
         nameDiv.textContent = userInfo.fullname;
+        //fetch users transactions
+        var transactions = await fetchTransactions(uid);
+        //renderprocess
+        renderTransactions(transactions);
+
     }
     else{
         location.assign("./index.html")
     }
-})
+});
